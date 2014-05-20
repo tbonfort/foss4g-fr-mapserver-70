@@ -89,13 +89,14 @@
                     <li>WFS 2.0
                     <li>Heatmaps/Density Maps
                     <li>Javascript/V8 StyleItem/Geomtransform
+                    <li>Unification du filtrage attributaire/geometrique
                   </ul>
                   <li>Autres
                   <ul>
                     <li>Refactoring du rendu texte
                     <li>Suppression du support GD
-                    <li>Support des encodages multiples
                     <li>Suppression des labels BITMAP
+                    <li>Support des encodages multiples
                     <li>Extensions WCS 2.0
                   </ul>
                 </ul>
@@ -104,7 +105,8 @@
                 <h2>Support UTFGrids</h2>
                 <ul>
                   <li>Spec MapBox permettant de tuiler des données vectorielles
-                  <li>Interactivité importante
+                  <li>Implémenté dans le cadre du "Google Summer of Code"
+                  <li>Interactivité importante (rollover, evenements JS)
                   <li>Support dans OpenLayers
                   <li>Pas encore de support tuilé dans MapCache
                 </ul>
@@ -164,6 +166,15 @@
                 </ul>
               </section>
               <section>
+                <h2>Unification du filtrage attributaire/spatial</h2>
+                <ul>
+                  <li>Actuellement filtrage spatial fait dans MapServer
+                  <li>Postgis, Oracle, OGR supportent un filtrage spatial natif (e.g. "where st_intersects(the_geom, st_geomfromtext('wkt...'))")
+                  <li>Gain de performances à attendre pour certaines requetes WFS
+                  <li>Actuellement l'élement bloquant pour release de 7.0
+                </ul>
+              </section>
+              <section>
                 <h2>Refactoring Rendu Texte</h2>
                 <ul>
                   <li>Implémentations naïves dupliquées pour chaque backend de rendu
@@ -192,17 +203,64 @@
                 <p>Exemple Tibéto-Birman</p>
               </section>
               <section>
-                <h2>What's coming next</h2>
+                <h2>Suppression du support GD</h2>
                 <ul>
-                  <li>TMS/GDAL source
-                  <li>Native
-                  <li>S3, Riak Caches
-                  <li>Vector Tiles (UTFGrid)
+                  <li>Ajouté en 1995, une page tournée!
+                  <li>Supprimé car coût de maintenance trop important, malgré son utilité dans certains cas niches
+                  <li>fallback automatique sur AGG + 8bits
+                </ul>
+                <h2>Suppression des labels BITMAP</h2>
+                <ul>
+                  <li>Police truetype par défaut incluse
+                  <li>Support de nombreux glyphes sans dépendance externe
+                  <li>Quelques use-cases non supportés 
+                </ul>
+              </section>
+              <section>
+                <h2>Support des Encodages Multiples</h2>
+                <ul>
+                  <li>Gestion de l'encodage problématique
+                  <li>Obligation d'avoir mapfile encodé à l'identique que la source de donnée
+                  <li>7.0: full UTF-8
+                  <li>Sources de données converties en entrée en UTF-8
+                  <li>Le mapfile <b>doit</b> maintenant être encodé en UTF-8
+                  <li>Les documents sont produits en UTF-8
+                </ul>
+              </section>
+              <section>
+                <h2>Extensions WCS 2.0</h2>
+                <ul>
+                  <li>Publiés/officialisés en début d'année
+                  <li>Passe 100% des tests CITE
+                  <li>Implémentation de référence?
+                </ul>
+              </section>
+              <section>
+                <h2>Traduction de la Documentation</h2>
+                <ul>
+                  <li>Mise en place par l'équipe FR d'une solution transifex pour traduction collaborative
+                  <li>Attrait pour les autres langues traduites
+                </ul>
+              </section>
+              <section>
+                <h2>MapCache: Backends REST</h2>
+                <ul>
+                  <li>Support GET/PUT/DELETE pour stockage des tuiles
+                  <li>Plugins d'authentification/autorisation pour S3, Azure et Google Cloud Storage
+                  <li>Selon les scénarios, bien étudier les coûts induits (nombre de requêtes, bande passante) 
+                </ul>
+                <h2>MapCache: Support TIME animé</h2>
+                <ul>
+                  <li>Support TIME existant, images fusionées
+                  <li>Mode "animation"
+                  <li>GIF animé pour le moment, d'autres formats vidéo possibles
                 </ul>
               </section>
 
               <section>
-                <h2>Thank you for your Attention</h2>
+                <h2>Questions?</h2>
+                <p></p>
+                <p>tbonfort@terriscope.fr</p>
               </section>
 
             </div>
