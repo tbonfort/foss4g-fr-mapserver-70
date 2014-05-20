@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>MapServer: Quoi de Neuf pour la 7.0?</title>
+
+        <meta name="description" content="Panorama des fonctionalités prévues pour la release 7.0">
+        <meta name="author" content="Thomas Bonfort">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="reveal.js/css/reveal.min.css">
+        <link rel="stylesheet" href="reveal.js/css/theme/osgeo.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="reveal.js/lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+
+              <section>
+                <h1>MapServer: Quoi de Neuf pour la 7.0 ?</h1>
+                <p></p>
+                <p>tbonfort@terriscope.fr</p>
+                <p>@tbonfort</p>
+
+                <aside class="notes">
+                  Notes go here
+                </aside>
+              </section>
+
+              <section>
+                <h2>20 ans d'existence: récapitulatif</h2>
+                <ul>
+                  <li>1994: naissance à l'UMN, financements NASA/FORNET
+                  <li>2001: OGC, postgis
+                  <li>2007: Naissance OSGEO
+                  <li>2009: Premier Code-Sprint (Toronto)
+                  <li>2014: v7.0 !
+                </ul>
+              </section>
+              <section>
+                <h2>Quelques Chiffres</h2>
+                <ul>
+                  <li>~150k LOC
+                  <li>~30 committers 
+                  <li>mailing lists: ~1800 pour -users, ~400 pour -dev
+                  <li>PSC international
+                  <ul>
+                    <li>14 membres
+                    <li>USA/Canada: 9
+                    <li>EU: 5 (FR: 2, IT: 1, AT: 1, HU: 1)
+                  </ul>
+                  <li>Un code sprint par an depuis 2009 (Toronto, New-York, Montréal, Seattle, Boston, Vienne)
+                </ul>
+              </section>
+              <section>
+                <h2>Releases</h2>
+                <ul>
+                  <li>Une version majeure toutes les années
+                  <li>Versions de maintenance intermédiaires, en fonction du besoin
+                </ul>
+              </section>
+              <section>
+                <h2>MapServer 7.0</h2>
+                <ul>
+                  <li>Nouveautés Majeures
+                  <ul>
+                    <li>UTFGrids
+                    <li>WFS 2.0
+                    <li>Heatmaps/Density Maps
+                    <li>Javascript/V8 StyleItem/Geomtransform
+                  </ul>
+                  <li>Autres
+                  <ul>
+                    <li>Refactoring du rendu texte
+                    <li>Suppression du support GD
+                    <li>Support des encodages multiples
+                    <li>Suppression des labels BITMAP
+                    <li>Extensions WCS 2.0
+                  </ul>
+                </ul>
+              </section>
+              <section>
+                <h2>Support UTFGrids</h2>
+                <ul>
+                  <li>Spec MapBox permettant de tuiler des données vectorielles
+                  <li>Interactivité importante
+                  <li>Support dans OpenLayers
+                  <li>Pas encore de support tuilé dans MapCache
+                </ul>
+              </section>
+              <section>
+                <h2>WFS 2.0</h2>
+                <ul>
+                  <li>Download Services INSPIRE
+                  <li>Présentation demain 14h
+                </ul>
+              </section>
+              <section>
+                <h2>HeatMaps</h2>
+                <ul>
+                  <li>Filtres permettant de representer sous format raster de la donnée vectorielle
+                  <li>Parametres d'interpolation/rendu:
+                  <ul>
+                    <li>Échelle automatique
+                    <li>Interpolation dans espaces de couleur RGB/HSL
+                    <li>Pondération par attribut/expression
+                  </ul>
+                  <li>Support en mode tuilé
+                </ul>
+              </section>
+              <section>
+                <h2>HeatMaps (1)</h2>
+                <img src="heatmap-hsl-10.png"/>
+                <p>interpolation en espace de couleur HSL</p>
+              </section>
+              <section>
+                <h2>HeatMaps (2)</h2>
+                <img src="heatmap-rgb.png"/>
+                <p>interpolation en espace de couleur RGB</p>
+              </section>
+              <section>
+                <h2>HeatMaps (3)</h2>
+                <img src="heatmap-hsl.png"/>
+                <p>interpolation en espace de couleur HSL</p>
+              </section>
+              <section>
+                <h2>HeatMaps (4)</h2>
+                <img src="heatmap-hsl-density.png"/>
+                <p>Densité pure</p>
+              </section>
+              <section>
+                <h2>HeatMaps (5)</h2>
+                <img src="heatmap-hsl-fix-scale.png"/>
+                <p>mise a l'échelle fixée</p>
+              </section>
+              <section>
+                <h2>Javascript (V8) StyleItem/GeomTransfom</h2>
+                <ul>
+                  <li>Integration de la librairie V8
+                  <li>Manipulation des geometries/features en fonction d'attributs
+                  <li>Manipulation des styles et symboles en fonction d'attributs
+                  <li>"Mode experimental": compatibilité arrière non garantie
+                </ul>
+              </section>
+              <section>
+                <h2>Refactoring Rendu Texte</h2>
+                <ul>
+                  <li>Implémentations naïves dupliquées pour chaque backend de rendu
+                  <li>Intégration de la librairie Harfbuzz
+                  <li>Peu visible pour l'utilisateur final, mais:
+                  <ul>
+                    <li>Alignement/centrage de textes exacts
+                    <li>Possibilité d'utiliser une police de caractères par langue
+                    <li>Support à terme de tous les scripts supportés par Unicode
+                  </ul>
+                </ul>
+              </section>
+              <section>
+                <h2>Refactoring Rendu Texte (1)</h2>
+                <img src="labelcache.png"/>
+                <p>Amélioration de perfs</p>
+              </section>
+              <section>
+                <h2>Refactoring Rendu Texte (2)</h2>
+                <img src="world-ml.png"/>
+                <p>Exemple Malayalam</p>
+              </section>
+              <section>
+                <h2>Refactoring Rendu Texte (3)</h2>
+                <img src="world-dz.png"/>
+                <p>Exemple Tibéto-Birman</p>
+              </section>
+              <section>
+                <h2>What's coming next</h2>
+                <ul>
+                  <li>TMS/GDAL source
+                  <li>Native
+                  <li>S3, Riak Caches
+                  <li>Vector Tiles (UTFGrid)
+                </ul>
+              </section>
+
+              <section>
+                <h2>Thank you for your Attention</h2>
+              </section>
+
+            </div>
+
+        </div>
+
+        <script src="reveal.js/lib/js/head.min.js"></script>
+        <script src="reveal.js/js/reveal.min.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                keyboard: true,
+                touch: true,
+                overview: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                    // { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+                    // { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>
